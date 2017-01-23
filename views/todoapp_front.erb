@@ -1,0 +1,204 @@
+<h1 class="heading" >YOUR TASKS MANAGER<h1><br>
+ 
+
+<div style="text-align: center;">
+<form action="/add_task" method="POST">
+	<input type="text"  name="task_name" ><br>
+	<input type="submit"  value="Add task">
+</form>
+</div style="text-align: center;">
+<% color_on_back = 0 %>
+<% which_class=" hello " %>
+
+<ul>
+
+<% tasks_list.each do |current_task| %>
+<% if !current_task %>
+<% next %>
+<% end %>	
+<% if current_task.Task_complete_status %>
+<%  which_class ="third" %>
+<% elsif color_on_back%2==0  %>
+<%  which_class = "first"  %>
+<% color_on_back = color_on_back + 1 %>
+<% else %>
+<%  which_class = "second"  %>
+<% color_on_back = color_on_back + 1 %>
+<% end %>
+<li>
+<div class=<%=which_class%> >
+	<%= "TASK NAME : " %>
+	<%=current_task.Task_name %>
+	<br>
+	<%= "TASK ADDED ON : " %>
+	<%=current_task.Task_time %>
+	<br>
+	<% important = "" %>
+	<% urgent = ""	  %>
+	<% mark_important = "" %>
+	<% mark_urgent = ""	  %>
+
+	<%if current_task.Task_importance%>
+	<%	important = "important"%>
+	<%	mark_important = "mark as not important"%>
+	<%else%>
+	<%	important = "not important"%>
+	<%	mark_important = "mark as important"%>
+	<%end%>
+
+	<%if current_task.Task_urgent%>
+	<%	urgent = "urgent"%>
+	<%	mark_urgent = "mark as not urgent"%>
+	<%else%>
+	<%	urgent = "not urgent"%>
+	<%	mark_urgent = "mark as urgent"%>
+	<%end%>
+
+	<%=  "This Task is : " %>
+	<%=  important %>
+	<%=  " and " %>
+	<%=  urgent %>
+	<br>
+	<form action="/importance" method="POST" class="li_butttons " >
+		<input type="hidden" name="task_id" value= "<%=current_task.Task_id%>">
+		<input type="submit" class="color_button" name="importance" value= "<%=mark_important%>" >
+	</form>
+	<form action="/urgency" method="POST" class="li_butttons " >
+		<input type="hidden" name="task_id" value="<%=current_task.Task_id%>">
+		<input type="submit" name="urgency" class="color_button" value="<%=mark_urgent%>" >
+	</form>
+	<form action="/completed" method="POST" class="li_butttons " >
+		<input type="hidden" name="task_id" value="<%=current_task.Task_id%>">
+		<input type="submit" name="complete" class="color_button" value="Toggle Complete Status" >
+	</form>
+	<form action="/remove" method="POST" class="li_butttons " >
+		<input type="hidden" name="task_id" value="<%=current_task.Task_id%>">
+		<input type="submit" name="remove" class="color_button" value="remove" >
+	</form>
+</div>
+</li>
+
+<% end %>
+
+</ul>
+
+<style>
+
+	.li_butttons{
+		display:inline;
+	}
+	.color_button{
+		background-color: #81c784 ;
+		color: : #ffffff ;
+	}
+	.middle{
+		align-content: center;
+	}
+	.first{
+		background-color: #ffa726 ;
+	}
+	.second{
+		background-color: #29b6f6 ;	
+	}
+	.third{
+		background-color: #757575 ;	
+	}
+	ul {
+  		list-style-type: none;
+	}
+	.heading{
+		text-align: center;
+		text-decoration: underline;
+		display:block;
+	}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
